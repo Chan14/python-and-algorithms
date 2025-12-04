@@ -1,0 +1,44 @@
+# --- Python general ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+
+# Virtual environments
+venv/
+env/
+.python-version
+
+# Pip / poetry / packaging
+*.egg-info/
+dist/
+build/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- OS / Editor ---
+.DS_Store
+.vscode/
+
+# --- Project-specific temporary folders ---
+untracked/
+*/untracked/
+
+# --- Logs ---
+*.log
+
+# --- Tests ---
+.coverage
+htmlcov/
+.cache/
+
+# --- Notebooks output (if you decide to ignore) ---
+# *.ipynb
+
+# --- Notes temp ---
+notes/tmp/
+
