@@ -131,3 +131,47 @@ class Category(Enum):
 #     domain behavior (e.g., tax rate for a product category)
 #     classification logic
 # You avoid scattering logic across if/elif/elif blocks.
+
+# Class-based Enum:
+
+# class Animal(Enum):          <-- class name, exists as variable too
+#     Dog = 1
+#     Cat = 2
+
+# Reference for subclassing: Animal
+# Variable name: Animal
+# Internal class name: Animal (same as variable)
+
+# Subclassing works:
+# class Pet(Animal):
+#     Rabbit = 3
+
+
+# Dynamic Enum:
+
+# Outside = Enum("Inside", ("Dog", "Cat"))  <-- variable points to class
+#                                             internal name = "Inside"
+
+# Reference for subclassing: Outside (the variable)
+# Variable name: Outside
+# Internal class name: "Inside" (metadata only)
+
+# Subclassing works:
+# class Pet(Outside):
+#     Lion = 2
+
+# Cannot use internal name "Inside" as variable:
+# class Pet(Inside):  <-- ❌ NameError
+#     Lion = 2
+# Always use the same variable name as the internal name for the enums.
+# Category = Enum("Category", ("Dog", "Cat", "Lion", "Tiger"))
+# The first string ("Category") matches the variable name (Category) so that when you print or inspect it, the names line up and it’s easy to read.
+
+# It’s purely for readability and debugging.
+
+# If you gave them different names:
+# X = Enum("Animals", ("Dog", "Cat"))
+# The variable you use is X.
+# The internal class name is "Animals".
+# Printing a member shows Animals.Dog, which can be confusing if your variable is called X.
+# So, giving them the same name is just a convention to keep things clean and intuitive.

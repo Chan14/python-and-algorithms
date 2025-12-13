@@ -206,3 +206,48 @@ print(b.walk())  # Robin is walking.
 # Not serialization frameworks.
 # Not complex event systems.
 # Just plain logic and real-world modeling.
+
+# A subclass does not need to define an __init__ method if it doesn’t need to do anything extra beyond what the base class already does.
+from enum import Enum
+from abc import ABC, abstractmethod
+
+Category = Enum("Category", ("Dog", "Cat", "Lion", "Tiger"))
+
+
+class Animal(ABC):
+    def __init__(self, name: str, category: Category):
+        self.name = name
+        self.category = category
+
+    @abstractmethod
+    def make_sound(self) -> str:
+        """All animals must make sound."""
+        pass
+
+
+class Dog(Animal):
+    def make_sound(self) -> str:
+        return "Woof!"
+
+
+# ✅ This is perfectly fine. Here’s why:
+
+# Inheritance of __init__
+# Dog inherits from Animal, so if you don’t define an __init__, Python automatically uses Animal.__init__.
+# You only need to write an __init__ in Dog if you want to add new attributes or change initialization behavior.
+
+# Abstract method requirement
+# The only requirement for Dog is to implement all abstract methods (make_sound).
+# Once you implement them, you can instantiate the class:
+my_dog = Dog("Buddy", Category.Dog)
+print(my_dog.name)  # Buddy
+print(my_dog.category)  # Category.Dog
+print(my_dog.make_sound())  # Woof!
+
+
+# Optional __init__ in subclass
+# If later you want Dog to have a breed attribute:
+class Dog(Animal):
+    def __init__(self, name: str, category: Category, breed: str):
+        super().__init__(name, category)
+        self.breed = breed
