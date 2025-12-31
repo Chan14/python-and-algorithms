@@ -133,3 +133,54 @@ print(intersect([5, 5, 9], [1, 3, 5, 7, 9]))
 print(intersect([1, 3, 5, 7, 9], [9]))
 print(intersect([], [9]))
 print(intersect([], []))
+
+# The Next Level: "Skipping" at the Source
+# There is one tiny refactor that separates a "good" solution from a "robust" one. Instead of checking c[-1] every time, some engineers prefer to "drain" duplicates from the source arrays using a nested while loop or by jumping the pointers.
+
+# Why? Because it keeps the logic of "finding a match" separate from the logic of "handling output."
+
+# The "skip logic" is a subtle but powerful shift in how you manage your pointers. In your previous version, you used the output (c[-1]) to decide if you should add a number. With skip logic, you use the input to ensure you only ever consider a unique number once.
+
+# The Refined Invariant
+# To support skipping, we tighten the invariant:
+
+# At the start of each iteration, a_idx and b_idx point to the first occurrence of a new value in their respective arrays that hasn't been processed yet.
+
+# The "Skip" Implementation
+# Instead of checking the output array, we advance our pointers past all identical values immediately after we find a match.
+
+
+def intersect_with_skipping(A, B):
+    a_idx = 0
+    b_idx = 0
+    c = []
+    # Invariant : At the start of each iteration, a_idx and b_idx point to the first occurrence of a new value in their respective arrays that hasn't been processed yet.
+    while a_idx < len(A) and b_idx < len(B):
+        if A[a_idx] < B[b_idx]:
+            a_idx += 1
+        elif A[a_idx] > B[b_idx]:
+            b_idx += 1
+        else:
+            # we found a match
+            current_val = A[a_idx]
+            c.append(current_val)
+
+            while a_idx < len(A) and A[a_idx] == current_val:
+                a_idx += 1
+            while b_idx < len(B) and B[b_idx] == current_val:
+                b_idx += 1
+    return c
+
+
+# Why this is a "Level Up"
+# Feature               c[-1] Approach                          The "Skip" Approach
+# Responsibility        The Output handles uniqueness.          The Pointers handle uniqueness.
+# Clarity               Very Pythonic and concise.              More "Low-level" and explicit.
+# Separation            Logic is mixed (matching + checking).   Logic is separate (matching, then advancing).
+# Edge Cases            Relies on c not being empty.            Relies only on array boundaries.
+
+print(intersect_with_skipping([1, 3, 3, 5, 5, 7, 9], [1, 3, 5, 7, 9]))
+print(intersect_with_skipping([5, 5, 9], [1, 3, 5, 7, 9]))
+print(intersect_with_skipping([1, 3, 5, 7, 9], [9]))
+print(intersect_with_skipping([], [9]))
+print(intersect_with_skipping([], []))
