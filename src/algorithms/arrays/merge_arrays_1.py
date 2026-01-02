@@ -178,11 +178,3 @@ def intersect_with_skipping(A, B):
 # Clarity               Very Pythonic and concise.              More "Low-level" and explicit.
 # Separation            Logic is mixed (matching + checking).   Logic is separate (matching, then advancing).
 # Edge Cases            Relies on c not being empty.            Relies only on array boundaries.
-
-print(intersect_with_skipping([1, 3, 3, 5, 5, 7, 9], [1, 3, 5, 7, 9]))
-print(intersect_with_skipping([5, 5, 9], [1, 3, 5, 7, 9]))
-print(intersect_with_skipping([1, 3, 5, 7, 9], [9]))
-print(intersect_with_skipping([], [9]))
-print(intersect_with_skipping([], []))
-
-# In an interview, the "Skip" approach is often preferred because it shows you can control your data stream at the source. If c was a write-only stream (like a network socket or a file) where you couldn't check c[-1], your original logic would break. The "Skip" logic would still work perfectly.
