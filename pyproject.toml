@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyalgos"
+version = "0.1.0"
+description = "Invariant-first algorithms, Python notes, and ML math experiments."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "Chan" }]
+# Runtime deps: only what code under src/ and experiments/ actually imports.
+dependencies = [
+    "numpy>=2.0",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+# pip install -e ".[dev]"
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+    "nbstripout>=0.7",
+    "jupyterlab>=4.0",
+    "ipykernel>=6.29",
+]
+
+# src layout: setuptools finds packages under src/ only.
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# importlib mode: test files in different folders may share a basename
+# (e.g. two test_utils.py) without "import file mismatch" errors, and tests
+# never import from the repo root by accident: they must use the installed package.
+addopts = ["--import-mode=importlib", "-ra"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+extend-exclude = ["scratch"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+# Long comment lines carry the notes; `ruff format` handles code width.
+ignore = ["E501"]
+# Notes/experiments deliberately redefine names and run code at top level.
+[tool.ruff.lint.per-file-ignores]
+"notes/**" = ["F811", "E402", "B018", "E501"]
+"experiments/**" = ["E402", "E501"]
+"notebooks/**" = ["E402", "F811", "B018"]
