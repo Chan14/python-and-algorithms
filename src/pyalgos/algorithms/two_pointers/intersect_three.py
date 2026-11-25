@@ -83,4 +83,5 @@ def intersect_three(A, B, C):
     return d
 
 
-print(intersect_three([1, 2, 3, 3, 4, 5, 6, 6, 7, 8, 9], [2, 3, 4, 5], [4, 5, 5, 6, 7]))
+if __name__ == "__main__":
+    print(intersect_three([1, 2, 3, 3, 4, 5, 6, 6, 7, 8, 9], [2, 3, 4, 5], [4, 5, 5, 6, 7]))

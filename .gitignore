@@ -1,44 +1,44 @@
-# --- Python general ---
+# --- Personal / never tracked ---
+# Any folder named "untracked", at any depth (a pattern without a leading "/"
+# matches at every level).
+untracked/
+notes/tmp/
+
+# --- Python ---
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-
-# C extensions
 *.so
 
-# Virtual environments
+# --- Virtual environments ---
+.venv/
 venv/
 env/
-.python-version
+# NOTE: .python-version is intentionally TRACKED (pins the interpreter).
 
-# Pip / poetry / packaging
+# --- Packaging ---
 *.egg-info/
 dist/
 build/
 
-# --- Jupyter ---
-.ipynb_checkpoints/
-
-# --- OS / Editor ---
-.DS_Store
-.vscode/
-
-# --- Project-specific temporary folders ---
-untracked/
-*/untracked/
-
-# --- Logs ---
-*.log
-
-# --- Tests ---
+# --- Tool caches ---
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
 .coverage
 htmlcov/
 .cache/
 
-# --- Notebooks output (if you decide to ignore) ---
-# *.ipynb
+# --- Jupyter ---
+.ipynb_checkpoints/
 
-# --- Notes temp ---
-notes/tmp/
+# --- Secrets ---
+.env
+.env.*
 
+# --- OS / editors ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- Logs ---
+*.log

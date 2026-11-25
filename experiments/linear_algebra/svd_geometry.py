@@ -14,12 +14,13 @@ horizontal/vertical.
 # %% Imports
 import os
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PLOT_DIR = os.path.join(SCRIPT_DIR, "plots")
-os.makedirs(PLOT_DIR, exist_ok=True)
+from pyalgos.paths import figures_dir
+
+# Plots go to <repo>/figures/linear_algebra/svd, regardless of cwd.
+PLOT_DIR = figures_dir("linear_algebra", "svd")
 
 # %% ---------------------------------------------------------------
 # Setup: choose W, x, and decompose
@@ -34,9 +35,11 @@ x = np.array([1.0, 1.5])
 
 # --- Build V from eig(W^T W), sorted descending ---
 WtW = W.T @ W
-eigvals, eigvecs = np.linalg.eig(WtW)
+# W^T W is symmetric, so use eigh: real eigenvalues, orthonormal eigenvectors.
+# (np.linalg.eig returns complex dtype on NumPy >= 2.5 even here.)
+eigvals, eigvecs = np.linalg.eigh(WtW)
 
-# np.linalg.eig does NOT sort. Sort descending so sigma_1 >= sigma_2.
+# eigh sorts ascending. Sort descending so sigma_1 >= sigma_2.
 order = np.argsort(eigvals)[::-1]
 eigvals = eigvals[order]
 eigvecs = eigvecs[:, order]

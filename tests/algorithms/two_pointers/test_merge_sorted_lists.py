@@ -1,4 +1,4 @@
-from merge_lists import merge
+from pyalgos.algorithms.two_pointers.merge_sorted_lists import merge
 
 
 def test_merge_empty_lists():

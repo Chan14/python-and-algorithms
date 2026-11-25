@@ -26,11 +26,10 @@ Explanation:
     contiguous subarray with sum >= k.
 """
 
-from typing import List
 from collections import deque
 
 
-def shortest_subarray_at_least_k(nums: List[int], k: int) -> int:
+def shortest_subarray_at_least_k(nums: list[int], k: int) -> int:
     """
     Returns the length of the shortest non-empty subarray
     with sum >= k. If no such subarray exists, return -1.
@@ -59,7 +58,6 @@ def shortest_subarray_at_least_k(nums: List[int], k: int) -> int:
     return -1 if best_len == float("inf") else best_len
 
 
-print(shortest_subarray_at_least_k([2, 4, -3, 4, 2, 6, 1, 2], 6))
 """
 Why Sliding Window Fails
 -----------------------
@@ -169,3 +167,7 @@ Invariant :
     No index in starts is dominated by another.
     Every subarray starting at an index < starts[0] and ending at any index < j has already been considered and cannot yield a shorter valid answer.
 """
+
+
+if __name__ == "__main__":
+    print(shortest_subarray_at_least_k([2, 4, -3, 4, 2, 6, 1, 2], 6))

@@ -8,8 +8,8 @@ Convention (locked):
     Each column D[:, j] is one feature.
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.patches import Circle
 
 
@@ -131,7 +131,7 @@ def plot_covariance(D, j, k, feature_names):
           facts about each feature individually; no joint-shape claim)
         - title shows the numerical Cov(X_j, X_k)
     """
-    from matplotlib.patches import Rectangle, Patch
+    from matplotlib.patches import Patch, Rectangle
 
     xj = D[:, j]
     xk = D[:, k]
@@ -472,8 +472,10 @@ def print_matrix(M, feature_names, title):
 if __name__ == "__main__":
     import os
 
-    # Save plots next to this script, regardless of where it is run from.
-    OUT_DIR = os.path.dirname(os.path.abspath(__file__))
+    from pyalgos.paths import figures_dir
+
+    # Save plots under <repo>/figures/stats/covariance, regardless of cwd.
+    OUT_DIR = figures_dir("stats", "covariance")
 
     np.set_printoptions(precision=4, suppress=True)
 

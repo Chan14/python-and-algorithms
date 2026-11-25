@@ -94,7 +94,7 @@
 # Failure is encoded in state, not checks.
 
 
-def minSubArrayLen(K, A):
+def min_subarray_len(K, A):
     left = 0
     current_sum = 0
     best = float("inf")
@@ -107,21 +107,28 @@ def minSubArrayLen(K, A):
     return 0 if best == float("inf") else best
 
 
-def minSubArray(K, A):
+def min_subarray(K, A):
+    """Return the shortest contiguous subarray of A with sum >= K ([] if none).
+
+    Failure is encoded in state: best = (lo, hi) is a half-open slice that
+    starts as the empty slice (0, 0), so "no valid window" returns A[0:0] == []
+    with no special-case check.
+    """
     left = 0
     current_sum = 0
     best_len = float("inf")
-    best = []
+    best = (0, 0)  # half-open (lo, hi); empty slice until a valid window is seen
     for right in range(len(A)):
         current_sum += A[right]
         while current_sum >= K:
-            if not best or (right - left + 1) < best_len:
+            if (right - left + 1) < best_len:
                 best_len = right - left + 1
-                best = [left, right]
+                best = (left, right + 1)
             current_sum -= A[left]
             left += 1
-    return A[best[0] : best[1] + 1]
+    return A[best[0] : best[1]]
 
 
-print(minSubArrayLen(15, [4, 5, 2, 7, 2, 6, 8, 1, 7, 9, 6]))
-print(minSubArray(15, [4, 5, 2, 7, 2, 6, 8, 1, 7, 9, 6]))
+if __name__ == "__main__":
+    print(min_subarray_len(15, [4, 5, 2, 7, 2, 6, 8, 1, 7, 9, 6]))
+    print(min_subarray(15, [4, 5, 2, 7, 2, 6, 8, 1, 7, 9, 6]))

@@ -1,0 +1,5 @@
+# Strip notebook outputs on commit (local files keep their outputs).
+# Activates once you run `nbstripout --install` in this clone; until then git
+# ignores these lines, so they are harmless.
+*.ipynb filter=nbstripout
+*.ipynb diff=ipynb

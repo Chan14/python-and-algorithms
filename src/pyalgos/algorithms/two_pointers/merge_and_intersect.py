@@ -74,11 +74,6 @@ def merge_arrays(A, B):
     return c
 
 
-print(merge_arrays([1, 3, 5, 7, 9], [2, 4, 6, 8, 10, 12, 14]))
-print(merge_arrays([], [2, 4, 6, 8, 10, 12, 14]))
-print(merge_arrays([1, 3, 5, 7, 9], []))
-print(merge_arrays([], []))
-
 # Problem — read carefully
 # Intersection of Two Sorted Arrays (Invariant-first)
 # You are given two sorted arrays, A and B.
@@ -128,12 +123,6 @@ def intersect(A, B):
     return c
 
 
-print(intersect([1, 3, 3, 5, 5, 7, 9], [1, 3, 5, 7, 9]))
-print(intersect([5, 5, 9], [1, 3, 5, 7, 9]))
-print(intersect([1, 3, 5, 7, 9], [9]))
-print(intersect([], [9]))
-print(intersect([], []))
-
 # The Next Level: "Skipping" at the Source
 # There is one tiny refactor that separates a "good" solution from a "robust" one. Instead of checking c[-1] every time, some engineers prefer to "drain" duplicates from the source arrays using a nested while loop or by jumping the pointers.
 
@@ -178,3 +167,15 @@ def intersect_with_skipping(A, B):
 # Clarity               Very Pythonic and concise.              More "Low-level" and explicit.
 # Separation            Logic is mixed (matching + checking).   Logic is separate (matching, then advancing).
 # Edge Cases            Relies on c not being empty.            Relies only on array boundaries.
+
+
+if __name__ == "__main__":
+    print(merge_arrays([1, 3, 5, 7, 9], [2, 4, 6, 8, 10, 12, 14]))
+    print(merge_arrays([], [2, 4, 6, 8, 10, 12, 14]))
+    print(merge_arrays([1, 3, 5, 7, 9], []))
+    print(merge_arrays([], []))
+    print(intersect([1, 3, 3, 5, 5, 7, 9], [1, 3, 5, 7, 9]))
+    print(intersect([5, 5, 9], [1, 3, 5, 7, 9]))
+    print(intersect([1, 3, 5, 7, 9], [9]))
+    print(intersect([], [9]))
+    print(intersect([], []))

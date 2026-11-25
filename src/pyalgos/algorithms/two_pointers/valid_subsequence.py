@@ -15,7 +15,7 @@
 
 
 # First attempt
-def isValidSubsequence1(array, sequence):
+def is_valid_subsequence_v1(array, sequence):
     left = 0
 
     for num in sequence:
@@ -74,7 +74,7 @@ def isValidSubsequence1(array, sequence):
 #     Advance sequence pointer only when you match
 
 
-def isValidSubsequence2(array, sequence):
+def is_valid_subsequence(array, sequence):
     seq_idx = 0
     for num in array:
         if seq_idx == len(sequence):
@@ -156,4 +156,6 @@ def isValidSubsequence2(array, sequence):
 
 # When you’re ready, say the word and we’ll move to the next problem or tie this into NumPy/vectorization.
 
-print(isValidSubsequence2([1, 1, 1, 1], [1, 1]))
+
+if __name__ == "__main__":
+    print(is_valid_subsequence([1, 1, 1, 1], [1, 1]))
