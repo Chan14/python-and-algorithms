@@ -55,17 +55,28 @@ python-and-algorithms/
 
 ## Setup
 
+The environment is a pyenv virtualenv named `pyalgos-env`, built on Python 3.13
+(the version pinned in `.python-version`).
+
 One time, from the repo root:
 
 ```bash
-python3.13 -m venv .venv          # or: uv venv  (reads .python-version)
-source .venv/bin/activate
-pip install -e ".[dev]"           # editable install: edits in src/ apply immediately
-nbstripout --install              # strip notebook outputs on commit; local files keep them
-python -m ipykernel install --user --name pyalgos --display-name "Python (pyalgos)"
+pyenv install 3.13                     # installs the latest 3.13.x pyenv knows about
+pyenv versions                         # note the exact version, e.g. 3.13.14
+pyenv virtualenv 3.13.14 pyalgos-env   # needs the exact version, not "3.13"
+pyenv activate pyalgos-env
+pip install -e ".[dev]"                # editable install: edits in src/ apply immediately
+nbstripout --install                   # strip notebook outputs on commit; local files keep them
+python -m ipykernel install --user --name pyalgos-env --display-name "Python (pyalgos-env)"
+pytest                                 # expect all tests to pass
 ```
 
-Then select the **Python (pyalgos)** kernel in Jupyter or VS Code.
+Then select the **Python (pyalgos-env)** kernel in Jupyter or VS Code.
+
+In each new terminal, run `pyenv activate pyalgos-env` before working.
+`.python-version` holds a version number rather than the environment name, so
+pyenv does not switch to `pyalgos-env` on its own when you `cd` into the repo.
+It stays a plain version so other tools (uv, CI) can read it too.
 
 ## Everyday commands
 
