@@ -13,7 +13,8 @@ __pycache__/
 .venv/
 venv/
 env/
-# NOTE: .python-version is intentionally TRACKED (pins the interpreter).
+# pyenv: each machine sets its own env with `pyenv local <env>`
+.python-version
 
 # --- Packaging ---
 *.egg-info/
